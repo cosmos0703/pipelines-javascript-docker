@@ -21,9 +21,10 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build and push an image to container registry
       inputs:
-        command: build
-        dockerfile: '**/app/Dockerfile'
-        tags: |
-          $(tag)
+        containerRegistry: 'ctkrpoc.azurecr.io'
+        repository: 'pod/treeoauth'
+        command: 'buildAndPush'
+        Dockerfile: '**/app/Dockerfile'
+        tags: '$(tag)'
